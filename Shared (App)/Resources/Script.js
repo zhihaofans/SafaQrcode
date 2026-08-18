@@ -25,6 +25,15 @@ function openSettings() {
     webkit.messageHandlers.controller.postMessage("open-settings");
 }
 
+// Replace the static page icon with the real app icon (macOS passes it in
+// as a PNG data URL at runtime, so the page always matches the app bundle).
+function setAppIcon(dataUrl) {
+    const icon = document.querySelector(".app-icon");
+    if (icon && dataUrl) {
+        icon.src = dataUrl;
+    }
+}
+
 document.querySelector("button.open-preferences").addEventListener("click", openPreferences);
 
 const settingsButton = document.querySelector("button.open-settings");

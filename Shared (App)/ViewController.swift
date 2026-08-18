@@ -32,11 +32,36 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
         self.webView.loadFileURL(Bundle.main.url(forResource: "Main", withExtension: "html")!, allowingReadAccessTo: Bundle.main.resourceURL!)
     }
 
+#if os(macOS)
+    override func viewDidAppear() {
+        super.viewDidAppear()
+
+        // Keep the window title in sync with the app display name, so Debug
+        // builds ("SafaQrcode(测试)") are easy to tell apart from the installed
+        // Release build ("SafaQrcode").
+        if let displayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String {
+            self.view.window?.title = displayName
+        }
+    }
+#endif
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 #if os(iOS)
         webView.evaluateJavaScript("show('ios')")
 #elseif os(macOS)
         webView.evaluateJavaScript("show('mac')")
+
+        // Inject the real app icon into the page, so the page always matches
+        // whatever icon the app bundle carries (no manual sync needed).
+        // Load the .icns directly and use its largest representation to avoid
+        // the washed-out upscaling NSWorkspace would produce.
+        if let iconPath = Bundle.main.path(forResource: "AppIcon", ofType: "icns"),
+           let icon = NSImage(contentsOfFile: iconPath),
+           let largestRep = icon.representations.max(by: { $0.pixelsWide < $1.pixelsWide }) as? NSBitmapImageRep,
+           let png = largestRep.representation(using: .png, properties: [:]) {
+            let dataUrl = "data:image/png;base64,\(png.base64EncodedString())"
+            webView.evaluateJavaScript("setAppIcon('\(dataUrl)')")
+        }
 
         SFSafariExtensionManager.getStateOfSafariExtension(withIdentifier: extensionBundleIdentifier) { (state, error) in
             guard let state = state, error == nil else {
