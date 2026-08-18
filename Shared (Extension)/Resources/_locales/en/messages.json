@@ -4,7 +4,7 @@
         "description": "The display name for the extension."
     },
     "extension_description": {
-        "message": "This is SafaQrcode. You should tell us what your extension does here.",
+        "message": "Generates a QR code for the current page's URL.",
         "description": "Description of what the extension does."
     }
 }

@@ -2,10 +2,15 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="popup.css">
+    <script src="qrcode.js"></script>
     <script type="module" src="popup.js"></script>
 </head>
 <body>
-    <strong>Hello World!</strong>
+    <h1 class="title">QR Code</h1>
+    <div id="qrcode" class="qrcode" hidden></div>
+    <p id="url" class="url"></p>
+    <p id="status" class="status"></p>
 </body>
 </html>
