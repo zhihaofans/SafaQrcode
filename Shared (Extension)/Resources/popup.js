@@ -9,6 +9,18 @@ const downloadButton = document.getElementById("download-btn");
 
 let currentUrl = null;
 
+// Decode percent-encoded characters (e.g. %E4%B8%AD -> 中) so non-English
+// URLs are readable. Only used for display; the QR code and copy button
+// keep the raw URL so scanning always opens the real page.
+function decodeUrlForDisplay(url) {
+    try {
+        return decodeURIComponent(url);
+    } catch (error) {
+        // Malformed percent-encoding — show the raw URL as-is.
+        return url;
+    }
+}
+
 function showError(message) {
     statusElement.textContent = message;
     statusElement.classList.add("visible");
@@ -33,16 +45,22 @@ function generateQR(url) {
 
 function renderQRCode(url) {
     currentUrl = url;
-    urlElement.textContent = url;
-    urlElement.title = url;
+    const displayUrl = decodeUrlForDisplay(url);
+    urlElement.textContent = displayUrl;
+    urlElement.title = displayUrl;
 
     const qr = generateQR(url);
-    qrContainer.innerHTML = qr.createSvgTag({
+    let svg = qr.createSvgTag({
         cellSize: 6,
         margin: 24,
         alt: url,
         title: url
     });
+    // Center the QR content inside the SVG viewport (the library uses
+    // "xMinYMin", which would hug the top-left corner if the box is not
+    // perfectly square — e.g. on iOS popups).
+    svg = svg.replace('preserveAspectRatio="xMinYMin meet"', 'preserveAspectRatio="xMidYMid meet"');
+    qrContainer.innerHTML = svg;
     qrContainer.hidden = false;
     actionsElement.hidden = false;
 }

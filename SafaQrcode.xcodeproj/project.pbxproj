@@ -139,6 +139,7 @@
 		26B8DD3200304646D00F31D7A /* Exceptions for "macOS (App)" folder in "SafaQrcode (macOS)" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"/Localized: Base.lproj/Main.storyboard",
 				Info.plist,
 			);
 			target = 26B8DCE13034646D00F31D7A /* SafaQrcode (macOS) */;
