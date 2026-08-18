@@ -16,7 +16,7 @@ import SafariServices
 typealias PlatformViewController = NSViewController
 #endif
 
-let extensionBundleIdentifier = "me.zzhhoo.SafaQrcode.Extension"
+let extensionBundleIdentifier = "com.zhihaofans.safaqrcode.safari-extension"
 
 class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMessageHandler {
 
@@ -26,10 +26,6 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
         super.viewDidLoad()
 
         self.webView.navigationDelegate = self
-
-#if os(iOS)
-        self.webView.scrollView.isScrollEnabled = false
-#endif
 
         self.webView.configuration.userContentController.add(self, name: "controller")
 
@@ -75,6 +71,12 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
                 NSApp.terminate(self)
             }
         }
+#elseif os(iOS)
+        if (message.body as! String != "open-settings") {
+            return
+        }
+
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
 #endif
     }
 

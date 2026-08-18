@@ -7,7 +7,25 @@
 :root {
     color-scheme: light dark;
 
-    --spacing: 20px;
+    --spacing: 16px;
+
+    --text-color: #1c1c1e;
+    --secondary-text-color: #6c6c70;
+    --card-background: rgba(127, 127, 127, 0.1);
+    --border-color: rgba(0, 0, 0, 0.12);
+    --button-background: #007aff;
+    --button-text-color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #f2f2f7;
+        --secondary-text-color: #98989d;
+        --card-background: rgba(127, 127, 127, 0.16);
+        --border-color: rgba(255, 255, 255, 0.18);
+        --button-background: #0a84ff;
+        --button-text-color: #ffffff;
+    }
 }
 
 html {
@@ -21,18 +39,17 @@ body {
     flex-direction: column;
 
     gap: var(--spacing);
-    margin: 0 calc(var(--spacing) * 2);
-    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: calc(var(--spacing) * 2);
+    box-sizing: border-box;
 
     font: -apple-system-short-body;
     text-align: center;
+    color: var(--text-color);
 }
 
 body:not(.platform-mac, .platform-ios) :is(.platform-mac, .platform-ios) {
-    display: none;
-}
-
-body.platform-ios .platform-mac {
     display: none;
 }
 
@@ -56,6 +73,79 @@ body.state-off :is(.state-on, .state-unknown) {
     display: none;
 }
 
+.app-icon {
+    width: 96px;
+    height: 96px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.tagline {
+    margin: -6px 0 0;
+    font-size: 13px;
+    color: var(--secondary-text-color);
+}
+
+.status {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--secondary-text-color);
+}
+
 button {
-    font-size: 1em;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--button-text-color);
+    background: var(--button-background);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(0.92);
+}
+
+button:active {
+    filter: brightness(0.85);
+}
+
+.tutorial {
+    width: 100%;
+    max-width: 440px;
+    margin: calc(var(--spacing) * 0.5) 0 0;
+    padding: 14px 18px;
+    box-sizing: border-box;
+
+    text-align: left;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+
+.tutorial h2 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.tutorial ol {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin: 0;
+    padding-left: 22px;
+}
+
+.tutorial li {
+    font-size: 13px;
+    line-height: 1.5;
 }

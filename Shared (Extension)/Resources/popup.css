@@ -11,7 +11,7 @@ body {
     margin: 0;
     padding: 16px;
 
-    font-family: -apple-system, system-ui, "Helvetica Neue", sans-serif;
+    font-family: -apple-system, system-ui, "PingFang SC", "Helvetica Neue", sans-serif;
     text-align: center;
     color: #1c1c1e;
     background: #ffffff;
@@ -57,6 +57,37 @@ body {
     display: block;
 }
 
+.actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.btn {
+    flex: 1;
+    padding: 8px 0;
+    font-size: 13px;
+    font-family: inherit;
+    color: #1c1c1e;
+    background: #f2f2f7;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #e5e5ea;
+}
+
+.btn:active {
+    background: #d1d1d6;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         color: #f2f2f7;
@@ -73,5 +104,19 @@ body {
 
     .status {
         color: #ff6961;
+    }
+
+    .btn {
+        color: #f2f2f7;
+        background: #2c2c2e;
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn:hover {
+        background: #3a3a3c;
+    }
+
+    .btn:active {
+        background: #48484a;
     }
 }
