@@ -1,0 +1,50 @@
+{
+    "extension_name": {
+        "message": "SafaQrcode",
+        "description": "扩展显示名称。"
+    },
+    "extension_description": {
+        "message": "为当前网页生成二维码。",
+        "description": "扩展描述。"
+    },
+    "popup_title": {
+        "message": "二维码",
+        "description": "弹窗标题。"
+    },
+    "copy_button": {
+        "message": "复制网址",
+        "description": "弹窗按钮。"
+    },
+    "download_button": {
+        "message": "下载二维码",
+        "description": "弹窗按钮。"
+    },
+    "copied": {
+        "message": "已复制",
+        "description": "复制成功后的按钮提示。"
+    },
+    "downloaded": {
+        "message": "已下载",
+        "description": "下载成功后的按钮提示。"
+    },
+    "error_no_url": {
+        "message": "无法读取当前页面网址。",
+        "description": "无法获取标签页网址时的提示。"
+    },
+    "error_not_http": {
+        "message": "此页面无法生成二维码。",
+        "description": "非网页时的提示。"
+    },
+    "error_generate": {
+        "message": "无法为此页面生成二维码。",
+        "description": "生成失败时的提示。"
+    },
+    "error_copy": {
+        "message": "复制失败，请手动复制下方网址。",
+        "description": "复制失败时的提示。"
+    },
+    "error_download": {
+        "message": "下载失败，请重试。",
+        "description": "下载失败时的提示。"
+    }
+}

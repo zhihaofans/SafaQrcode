@@ -6,5 +6,45 @@
     "extension_description": {
         "message": "Generates a QR code for the current page's URL.",
         "description": "Description of what the extension does."
+    },
+    "popup_title": {
+        "message": "QR Code",
+        "description": "Popup heading."
+    },
+    "copy_button": {
+        "message": "Copy URL",
+        "description": "Popup button."
+    },
+    "download_button": {
+        "message": "Download QR Code",
+        "description": "Popup button."
+    },
+    "copied": {
+        "message": "Copied",
+        "description": "Button feedback after copying."
+    },
+    "downloaded": {
+        "message": "Downloaded",
+        "description": "Button feedback after downloading."
+    },
+    "error_no_url": {
+        "message": "Could not read the current page URL.",
+        "description": "Error shown when the tab URL is unavailable."
+    },
+    "error_not_http": {
+        "message": "This page type cannot be converted to a QR code.",
+        "description": "Error shown for non-web pages."
+    },
+    "error_generate": {
+        "message": "Could not generate a QR code for this page.",
+        "description": "Generic generation error."
+    },
+    "error_copy": {
+        "message": "Copy failed. Please copy the URL manually.",
+        "description": "Error when clipboard copy fails."
+    },
+    "error_download": {
+        "message": "Download failed. Please try again.",
+        "description": "Error when download fails."
     }
 }

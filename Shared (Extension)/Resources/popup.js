@@ -9,6 +9,15 @@ const downloadButton = document.getElementById("download-btn");
 
 let currentUrl = null;
 
+// Localized message helper (falls back to the key if missing).
+function msg(key) {
+    if (browser.i18n && browser.i18n.getMessage) {
+        const value = browser.i18n.getMessage(key);
+        if (value) return value;
+    }
+    return key;
+}
+
 // Decode percent-encoded characters (e.g. %E4%B8%AD -> 中) so non-English
 // URLs are readable. Only used for display; the QR code and copy button
 // keep the raw URL so scanning always opens the real page.
@@ -34,6 +43,14 @@ function flashButton(button, text) {
         button.textContent = originalText;
         button.disabled = false;
     }, 1500);
+}
+
+// Localize the static elements from the HTML (Safari does not reliably
+// substitute __MSG_ placeholders in extension pages).
+function applyStaticTexts() {
+    document.querySelector(".title").textContent = msg("popup_title");
+    copyButton.textContent = msg("copy_button");
+    downloadButton.textContent = msg("download_button");
 }
 
 function generateQR(url) {
@@ -71,7 +88,7 @@ async function copyUrl() {
     try {
         if (navigator.clipboard) {
             await navigator.clipboard.writeText(currentUrl);
-            flashButton(copyButton, "已复制");
+            flashButton(copyButton, msg("copied"));
             return;
         }
         throw new Error("clipboard unavailable");
@@ -92,9 +109,9 @@ async function copyUrl() {
         textarea.remove();
 
         if (copied) {
-            flashButton(copyButton, "已复制");
+            flashButton(copyButton, msg("copied"));
         } else {
-            showError("复制失败，请手动复制下方网址。");
+            showError(msg("error_copy"));
         }
     }
 }
@@ -132,7 +149,7 @@ function downloadQRCode() {
 
     canvas.toBlob((blob) => {
         if (!blob) {
-            showError("下载失败，请重试。");
+            showError(msg("error_download"));
             return;
         }
 
@@ -145,7 +162,7 @@ function downloadQRCode() {
         link.remove();
         setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
 
-        flashButton(downloadButton, "已下载");
+        flashButton(downloadButton, msg("downloaded"));
     }, "image/png");
 }
 
@@ -159,23 +176,25 @@ copyButton.addEventListener("click", copyUrl);
 downloadButton.addEventListener("click", downloadQRCode);
 
 (async function init() {
+    applyStaticTexts();
+
     try {
         const url = await getActiveTabUrl();
 
         if (!url) {
-            showError("无法读取当前页面网址。");
+            showError(msg("error_no_url"));
             return;
         }
 
         // Only web pages can be meaningfully encoded; skip internal Safari pages.
         if (!/^https?:\/\//i.test(url)) {
-            showError("此页面无法生成二维码。");
+            showError(msg("error_not_http"));
             return;
         }
 
         renderQRCode(url);
     } catch (error) {
         console.error("Failed to generate QR code:", error);
-        showError("无法为此页面生成二维码。");
+        showError(msg("error_generate"));
     }
 })();
