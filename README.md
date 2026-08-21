@@ -4,7 +4,7 @@
 
 SafaQrcode 是一款适用于 iOS 和 macOS 的 Safari 扩展，为当前网页一键生成二维码，扫码即可在手机上打开。
 
-![icon](https://github.com/zhihaofans/SafaQrcode/blob/main/Shared%20(App)/Resources/Icon.png)
+![icon](https://github.com/zhihaofans/SafaQrcode/blob/master/Shared%20(App)/Resources/Icon.png)
 
 ---
 
@@ -33,8 +33,8 @@ SafaQrcode collects **no personal data**. The current page URL is read **only** 
 
 SafaQrcode **不收集任何个人数据**。仅在主动打开扩展时读取当前页网址，且仅用于在设备上生成二维码，不会传输或存储。
 
-- [Privacy Policy / 隐私政策](https://github.com/zhihaofans/SafaQrcode/blob/main/docs/privacy-policy.md)
-- [Support / 支持](https://github.com/zhihaofans/SafaQrcode/blob/main/docs/support.md)
+- [Privacy Policy / 隐私政策](https://github.com/zhihaofans/SafaQrcode/blob/master/docs/privacy-policy.md)
+- [Support / 支持](https://github.com/zhihaofans/SafaQrcode/blob/master/docs/support.md)
 
 ## 🔗 Project / 项目
 
